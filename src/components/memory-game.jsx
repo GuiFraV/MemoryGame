@@ -78,13 +78,15 @@ const MemoryGame = () => {
   }, [solved, cards]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-grey-100 p-4">
-      <h1 className="text-3xl font-bold mb-6">Memory game</h1>
-      {/* Input */}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-200 p-6">
+      <h1 className="text-4xl font-extrabold mb-6 text-purple-500">
+        Memory Game
+      </h1>
 
-      <div className="mb-4">
-        <label className="mr-2" htmlFor="gridSize">
-          Grid Size : (max 10)
+      {/* Input */}
+      <div className="mb-6 flex flex-col items-center">
+        <label htmlFor="gridSize" className="text-lg mb-2 text-gray-400">
+          Select Grid Size (2 - 10):
         </label>
         <input
           type="number"
@@ -93,16 +95,16 @@ const MemoryGame = () => {
           max="10"
           value={gridSize}
           onChange={handleGridSizeChange}
-          className="border-2 border-grey-300 rounded px-2 py-1"
+          className="w-20 text-center bg-gray-800 text-gray-200 border border-purple-500 rounded-lg px-2 py-1 focus:ring focus:ring-purple-500"
         />
       </div>
 
       {/* Game Board */}
       <div
-        className={`grid gap-2 mb-4`}
+        className={`grid gap-4 mb-6`}
         style={{
           gridTemplateColumns: `repeat(${gridSize}, minmax(0,1fr))`,
-          width: `min(100%, ${gridSize * 5.5}rem)`,
+          width: `min(100%, ${gridSize * 6}rem)`,
         }}
       >
         {cards.map((card) => {
@@ -110,12 +112,12 @@ const MemoryGame = () => {
             <div
               key={card.id}
               onClick={() => handleClick(card.id)}
-              className={`aspect-square flex items-center justify-center text-xl font-bold rounded-lg cursor-pointer transition-all duration-300 bg-gray-300 text-gray-400 ${
+              className={`aspect-square flex items-center justify-center text-2xl font-semibold rounded-lg shadow-md cursor-pointer transition-transform transform ${
                 isFlipped(card.id)
                   ? isSolved(card.id)
-                    ? "bg-green-500 text-white"
-                    : "bg-blue-500 text-white"
-                  : "bg-gray-300 text-gray-400"
+                    ? "bg-green-500 text-gray-900 scale-110"
+                    : "bg-blue-500 text-gray-900 scale-110"
+                  : "bg-gray-700 text-gray-500 hover:scale-105 hover:bg-gray-600"
               }`}
             >
               {isFlipped(card.id) ? card.number : "?"}
@@ -125,17 +127,16 @@ const MemoryGame = () => {
       </div>
 
       {/* Result */}
-
       {won && (
-        <div className="mt-4 text-4xl font-bold text-green-600 animate-bounce">
-          Yon Won !
+        <div className="mt-6 text-3xl font-bold text-green-400 animate-pulse">
+          You Won! 🎉
         </div>
       )}
 
       {/* Reset / Play Again */}
       <button
         onClick={initializeGame}
-        className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+        className="mt-6 px-6 py-3 bg-purple-600 text-gray-100 rounded-lg shadow-lg hover:bg-purple-500 transition-colors"
       >
         {won ? "Play Again" : "Reset"}
       </button>
