@@ -1,6 +1,6 @@
 import "./App.css";
-import MemoryGame from "./components/memory-game";
+import NewMemoryGame from "./components/new-memory-game";
 
 export default function App() {
-  return <MemoryGame />;
+  return <NewMemoryGame />;
 }
